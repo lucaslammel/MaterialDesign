@@ -38,10 +38,14 @@ class MyHomePage extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: [
-            DrawerHeader(
-              child: Text('Opções'),
+            UserAccountsDrawerHeader(
+              accountEmail: Text(""),
+              accountName: Text("BEM VINDO"),
+              currentAccountPicture: CircleAvatar(
+                  backgroundImage: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVYp37ZkfLmItT1CzZzucFCC-fOm4YrTTxownb835d&s")
+              ),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.black,
               ),
             ),
             ListTile(

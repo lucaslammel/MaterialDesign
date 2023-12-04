@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'actions_carousel.dart';
+import 'examples_carousel.dart';
 
 class CategoryContent {
   final String title;
@@ -9,7 +9,7 @@ class CategoryContent {
 }
 
 // Crie instâncias da classe para cada categoria
-CategoryContent actionsContent = CategoryContent(
-  'Actions',
-  getActionsCarouselItems(),
+CategoryContent examplesContent = CategoryContent(
+  'Examples',
+  getExamplesCarouselItems(),
 );

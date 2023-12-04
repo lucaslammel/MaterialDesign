@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'category_content.dart';
-import 'actions_carousel.dart'; // Importe o novo arquivo
+import 'examples_carousel.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: MyHomePage(),
       routes: {
-        '/actions': (context) => CategoryPage(actionsContent),
+        '/examples': (context) => CategoryPage(examplesContent),
         // ... Outras categorias
       },
     );
@@ -45,9 +45,9 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text('Actions'),
+              title: Text('Exemplos'),
               onTap: () {
-                Navigator.pushNamed(context, '/actions');
+                Navigator.pushNamed(context, '/examples');
               },
             ),
             // ... Outras opções do Drawer

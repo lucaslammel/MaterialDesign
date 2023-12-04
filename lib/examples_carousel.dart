@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:badges/badges.dart' as badges;
+import 'dart:async';
 
-List<Widget> getActionsCarouselItems() {
+
+List<Widget> getExamplesCarouselItems() {
   return [
     LoginForm(),
     TaskList(),
     SegmentedButtonApp(),
+    PageWithBadge(),
   ];
 }
 
@@ -116,10 +120,9 @@ class SegmentedButtonApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
-      home: const Scaffold(
-        body: Center(
+    return Container(
+      color: Colors.grey.shade200,
+      padding: EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -132,8 +135,6 @@ class SegmentedButtonApp extends StatelessWidget {
               Spacer(),
             ],
           ),
-        ),
-      ),
     );
   }
 }
@@ -208,6 +209,102 @@ class _MultipleChoiceState extends State<MultipleChoice> {
         });
       },
       multiSelectionEnabled: true,
+    );
+  }
+}
+
+class PageWithBadge extends StatefulWidget {
+  @override
+  _PageWithBadgeState createState() => _PageWithBadgeState();
+}
+
+class _PageWithBadgeState extends State<PageWithBadge> {
+  bool _progressVisible = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.grey.shade200, // Adicionando a cor de fundo
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Página com Badge'),
+        ),
+        body: Center(
+          child: _progressVisible
+              ? LinearProgressIndicator()
+              : Text('Conteúdo da Página com Badge'),
+        ),
+        backgroundColor: Colors.grey.shade200,
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              badges.Badge(
+                badgeContent: Icon(Icons.star),
+                child: IconButton(
+                  icon: Icon(Icons.favorite),
+                  onPressed: () {
+                    _showProgress();
+                    // Simulando uma operação demorada
+                    Future.delayed(Duration(seconds: 3), () {
+                      _hideProgress();
+                      _showSnackBar('Página Favorita Aberta');
+                    });
+                  },
+                ),
+              ),
+              badges.Badge(
+                badgeContent: Icon(Icons.email),
+                child: IconButton(
+                  icon: Icon(Icons.mail),
+                  onPressed: () {
+                    _showProgress();
+                    // Simulando uma operação demorada
+                    Future.delayed(Duration(seconds: 3), () {
+                      _hideProgress();
+                      _showSnackBar('Página de E-mail Aberta');
+                    });
+                  },
+                ),
+              ),
+              badges.Badge(
+                badgeContent: Icon(Icons.chat),
+                child: IconButton(
+                  icon: Icon(Icons.message),
+                  onPressed: () {
+                    _showProgress();
+                    // Simulando uma operação demorada
+                    Future.delayed(Duration(seconds: 3), () {
+                      _hideProgress();
+                      _showSnackBar('Página de Mensagens Aberta');
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showProgress() {
+    setState(() {
+      _progressVisible = true;
+    });
+  }
+
+  void _hideProgress() {
+    setState(() {
+      _progressVisible = false;
+    });
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
     );
   }
 }

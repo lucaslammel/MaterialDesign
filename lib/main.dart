@@ -1,6 +1,7 @@
+import 'package:app_trabalho_material_design/pratica_content.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'category_content.dart';
+import 'examples_content.dart';
 import 'examples_carousel.dart';
 
 void main() => runApp(MyApp());
@@ -9,10 +10,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(),
       routes: {
-        '/examples': (context) => CategoryPage(examplesContent),
-        // ... Outras categorias
+        '/examples': (context) => ExamplesPage(examplesContent),
+        '/pratica': (context) => PraticaPage(praticaContent),
       },
     );
   }
@@ -54,7 +59,12 @@ class MyHomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/examples');
               },
             ),
-            // ... Outras opções do Drawer
+            ListTile(
+              title: Text('Pratica'),
+              onTap: () {
+                Navigator.pushNamed(context, '/pratica');
+              },
+            ),
           ],
         ),
       ),
@@ -65,16 +75,16 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class CategoryPage extends StatelessWidget {
-  final CategoryContent categoryContent;
+class ExamplesPage extends StatelessWidget {
+  final ExamplesContent examplesContent;
 
-  CategoryPage(this.categoryContent);
+  ExamplesPage(this.examplesContent);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoryContent.title),
+        title: Text(examplesContent.title),
       ),
       body: Column(
         children: [
@@ -86,10 +96,26 @@ class CategoryPage extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.7,
               enlargeCenterPage: true,
             ),
-            items: categoryContent.carouselItems,
+            items: examplesContent.carouselItems,
           ),
         ],
       ),
+    );
+  }
+}
+
+class PraticaPage extends StatelessWidget {
+  final PraticaContent praticaContent;
+
+  PraticaPage(this.praticaContent);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(praticaContent.title),
+      ),
+      body: praticaContent.getPage(), // Chame o método getPage para obter o widget
     );
   }
 }

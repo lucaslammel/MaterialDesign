@@ -439,11 +439,19 @@ class MaterialExamplesPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.network(
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVYp37ZkfLmItT1CzZzucFCC-fOm4YrTTxownb835d&s',
+                Container(
                   width: double.infinity,
-                  height: 150.0,
-                  fit: BoxFit.cover,
+                  height: 120,
+                  clipBehavior: Clip.antiAlias,
+                  decoration:  BoxDecoration(
+                      borderRadius: BorderRadius.circular(25)
+                  ),
+                  child: Image.network(
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVYp37ZkfLmItT1CzZzucFCC-fOm4YrTTxownb835d&s',
+                    width: double.infinity,
+                    height: 150.0,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
